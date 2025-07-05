@@ -6,11 +6,13 @@ const config = {
     parent: 'game-container',
     width: window.innerWidth,
     height: window.innerHeight,
+    resolution: window.devicePixelRatio || 1,
+    pixelArt: true,
     scale: {
-        mode: Phaser.Scale.RESIZE,
-        autoCenter: Phaser.Scale.CENTER_BOTH
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: [MainMenu, MainScene]
+    scene: [MainMenu, MainScene],
 };
 
 const game = new Phaser.Game(config);

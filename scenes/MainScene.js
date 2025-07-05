@@ -4,7 +4,8 @@ export default class MainScene extends Phaser.Scene {
     }
 
     preload() {
-        // Preload assets for the main game here
+        // Simple image to demonstrate crisp rendering
+        this.load.image('logo', 'assets/main menu.png');
     }
 
     create() {
@@ -18,6 +19,9 @@ export default class MainScene extends Phaser.Scene {
                 strokeThickness: 2,
             })
             .setOrigin(0.5);
+
+        // Centered sprite for testing high DPI rendering
+        this.logo = this.add.image(width / 2, height / 2 - 100, 'logo').setOrigin(0.5);
 
         this.resizeUI({ width, height });
 
