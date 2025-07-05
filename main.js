@@ -1,24 +1,11 @@
+import MainMenu from './ui/MainMenu.js';
+import MainScene from './scenes/MainScene.js';
+
 const config = {
     type: Phaser.AUTO,
     width: 800,
     height: 600,
-    scene: {
-        preload: preload,
-        create: create,
-        update: update
-    }
+    scene: [MainMenu, MainScene]
 };
 
-const game = new Phaser.Game(config);
-
-function preload() {
-    // Preload assets here
-}
-
-function create() {
-    // Initialize game objects here
-}
-
-function update() {
-    // Game loop logic here
-}
+new Phaser.Game(config);
