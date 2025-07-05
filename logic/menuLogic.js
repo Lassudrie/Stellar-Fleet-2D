@@ -24,9 +24,9 @@ export function createMenuButton(scene, x, y, label, callback, fontSize = 28) {
         fontFamily: 'Orbitron',
         fontSize: `${fontSize}px`,
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
-        color: '#0ff',
+        color: '#00ffe0',
         padding: { x: 20, y: 10 },
-        stroke: '#0ff',
+        stroke: '#00ffe0',
         strokeThickness: 2
     };
 

@@ -19,7 +19,7 @@ export default class MainScene extends Phaser.Scene {
             .text(0, 0, title, {
                 fontFamily: 'Orbitron',
                 color: '#FFFFFF',
-                stroke: '#0ff',
+                stroke: '#00ffe0',
                 strokeThickness: 2,
             })
             .setOrigin(0.5);

@@ -1,12 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600&display=swap');
 
 html, body {
     margin: 0;
     padding: 0;
     height: 100%;
-    background-color: #000;
-    color: #0ff;
-    font-family: 'Orbitron', sans-serif;
+    background: #0b0f1a;
+    color: #e0e0e0;
+    font-family: 'Orbitron', 'Rajdhani', sans-serif;
 }
 
 #game-container {
@@ -22,11 +23,21 @@ canvas {
 }
 
 .form-container {
-    background: rgba(0, 0, 0, 0.6);
+    width: 80%;
+    max-width: 420px;
+    background: rgba(11, 15, 26, 0.9);
     padding: 20px;
-    border: 2px solid #0ff;
-    color: #0ff;
-    font-family: 'Orbitron', sans-serif;
+    border: 2px solid #00ffe0;
+    border-radius: 8px;
+    box-shadow: 0 0 12px rgba(0, 255, 224, 0.2);
+    color: #e0e0e0;
+    font-family: 'Orbitron', 'Rajdhani', sans-serif;
+}
+.form-container h2 {
+    margin-top: 0;
+    margin-bottom: 16px;
+    color: #00ffe0;
+    text-align: center;
 }
 .form-container label {
     display: block;
@@ -37,16 +48,28 @@ canvas {
     width: 100%;
     margin-top: 4px;
     margin-bottom: 12px;
-    background: #000;
-    color: #0ff;
-    border: 1px solid #0ff;
+    padding: 6px 8px;
+    background: #0b0f1a;
+    color: #e0e0e0;
+    border: 1px solid #00ffe0;
+    border-radius: 4px;
+    transition: box-shadow 0.3s;
 }
 .form-container button {
     display: block;
     margin: 0 auto;
     padding: 8px 20px;
     background: #001020;
-    color: #0ff;
-    border: 1px solid #0ff;
+    color: #00ffe0;
+    border: 1px solid #00ffe0;
+    border-radius: 4px;
     cursor: pointer;
+    transition: box-shadow 0.3s;
+}
+.form-container input:hover,
+.form-container input:focus,
+.form-container select:hover,
+.form-container select:focus,
+.form-container button:hover {
+    box-shadow: 0 0 8px #00ffe0;
 }

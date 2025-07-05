@@ -39,13 +39,14 @@ export default class MainMenu extends Phaser.Scene {
         this.titleText = this.add
             .text(0, 0, 'Stellar Fleet 2D', {
                 fontFamily: 'Orbitron',
-                color: '#0ff',
-                stroke: '#0ff',
+                color: '#00ffe0',
+                stroke: '#00ffe0',
                 strokeThickness: 2,
             })
             .setOrigin(0.5);
 
         this.playButton = createMenuButton(this, 0, 0, 'New Game', () => {
+            this.scene.start('SetupScene');
         });
 
         this.quitButton = createMenuButton(this, 0, 0, 'Quit', () => {
