@@ -1,5 +1,4 @@
 import { createMenuButton, clamp } from '../logic/menuLogic.js';
-import MainScene from '../scenes/MainScene.js';
 
 // Ratios and limits for responsive layout
 const TITLE_RATIO = 0.08;
@@ -19,7 +18,7 @@ export default class MainMenu extends Phaser.Scene {
     }
 
     preload() {
-        // No external assets used for UI, the menu background is drawn with shapes
+        this.load.image('menuBg', 'assets/main menu.png');
     }
 
     create() {
@@ -28,8 +27,8 @@ export default class MainMenu extends Phaser.Scene {
         // container grouping all UI elements for easy resizing
         this.uiContainer = this.add.container(0, 0);
 
-        // background rectangle simulating a menu image
-        this.bg = this.add.rectangle(0, 0, width, height, 0x001020, 0.9).setOrigin(0);
+        // background image
+        this.bgImage = this.add.image(0, 0, 'menuBg').setOrigin(0).setDisplaySize(width, height);
 
         // placeholder logo
         this.logo = this.add
@@ -47,7 +46,6 @@ export default class MainMenu extends Phaser.Scene {
             .setOrigin(0.5);
 
         this.playButton = createMenuButton(this, 0, 0, 'New Game', () => {
-            this.scene.start('MainScene');
         });
 
         this.quitButton = createMenuButton(this, 0, 0, 'Quit', () => {
@@ -63,7 +61,7 @@ export default class MainMenu extends Phaser.Scene {
             }
         });
 
-        this.uiContainer.add([this.bg, this.logo, this.titleText, this.playButton, this.quitButton]);
+        this.uiContainer.add([this.bgImage, this.logo, this.titleText, this.playButton, this.quitButton]);
 
         // fade in effect
         this.uiContainer.setAlpha(0);
@@ -79,7 +77,7 @@ export default class MainMenu extends Phaser.Scene {
         const { width, height } = gameSize;
         const min = Math.min(width, height);
 
-        this.bg.setSize(width, height);
+        this.bgImage.setDisplaySize(width, height);
 
         const titleSize = clamp(height * TITLE_RATIO, MIN_TITLE, MAX_TITLE);
         this.titleText.setFontSize(titleSize);

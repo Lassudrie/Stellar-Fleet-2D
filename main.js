@@ -1,4 +1,5 @@
 import MainMenu from './ui/MainMenu.js';
+import SetupScene from './scenes/SetupScene.js';
 import MainScene from './scenes/MainScene.js';
 
 const config = {
@@ -12,7 +13,10 @@ const config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: [MainMenu, MainScene],
+    dom: {
+        createContainer: true,
+    },
+    scene: [MainMenu, SetupScene, MainScene],
 };
 
 const game = new Phaser.Game(config);
