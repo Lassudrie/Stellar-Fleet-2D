@@ -6,9 +6,26 @@ export default class MainMenu extends Phaser.Scene {
         super('MainMenu');
     }
 
+    preload() {
+        this.load.image('mainMenuBg', 'assets/main menu.png');
+    }
+
     create() {
         const { width, height } = this.scale;
-        this.add.text(width / 2, height / 2 - 100, 'Stellar Fleet 2D', { fontSize: '32px', color: '#fff' }).setOrigin(0.5);
+        this.add
+            .image(width / 2, height / 2, 'mainMenuBg')
+            .setOrigin(0.5)
+            .setDisplaySize(width, height);
+
+        this.add
+            .text(width / 2, height / 2 - 100, 'Stellar Fleet 2D', {
+                fontFamily: 'Orbitron',
+                fontSize: '48px',
+                color: '#0ff',
+                stroke: '#0ff',
+                strokeThickness: 1,
+            })
+            .setOrigin(0.5);
 
         createMenuButton(this, width / 2, height / 2, 'New Game', () => {
             this.scene.start('MainScene');
