@@ -18,6 +18,7 @@ export default class SetupScene extends Phaser.Scene {
 
         const formHtml = `
             <div class="form-container">
+                <h2>New Empire Setup</h2>
                 <div>
                     <label>Empire Name:<br><input type="text" id="empireName" /></label>
                 </div>
