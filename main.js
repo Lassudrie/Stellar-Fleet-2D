@@ -3,9 +3,19 @@ import MainScene from './scenes/MainScene.js';
 
 const config = {
     type: Phaser.AUTO,
-    width: 800,
-    height: 600,
+    parent: 'game-container',
+    width: window.innerWidth,
+    height: window.innerHeight,
+    scale: {
+        mode: Phaser.Scale.RESIZE,
+        autoCenter: Phaser.Scale.CENTER_BOTH
+    },
     scene: [MainMenu, MainScene]
 };
 
-new Phaser.Game(config);
+const game = new Phaser.Game(config);
+
+window.addEventListener('resize', () => {
+    game.scale.resize(window.innerWidth, window.innerHeight);
+});
+
