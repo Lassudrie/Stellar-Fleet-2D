@@ -8,11 +8,15 @@ export default class MainScene extends Phaser.Scene {
         this.load.image('logo', 'assets/main menu.png');
     }
 
-    create() {
+    create(data) {
         const { width, height } = this.scale;
+        this.setupData = data?.setupData;
 
+        const title = this.setupData?.empireName
+            ? `Empire: ${this.setupData.empireName}`
+            : 'Game Scene';
         this.infoText = this.add
-            .text(0, 0, 'Game Scene', {
+            .text(0, 0, title, {
                 fontFamily: 'Orbitron',
                 color: '#FFFFFF',
                 stroke: '#0ff',

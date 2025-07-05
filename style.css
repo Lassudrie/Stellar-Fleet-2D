@@ -20,3 +20,33 @@ canvas {
     margin: 0 auto;
     image-rendering: pixelated;
 }
+
+.form-container {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border: 2px solid #0ff;
+    color: #0ff;
+    font-family: 'Orbitron', sans-serif;
+}
+.form-container label {
+    display: block;
+    margin-bottom: 8px;
+}
+.form-container input,
+.form-container select {
+    width: 100%;
+    margin-top: 4px;
+    margin-bottom: 12px;
+    background: #000;
+    color: #0ff;
+    border: 1px solid #0ff;
+}
+.form-container button {
+    display: block;
+    margin: 0 auto;
+    padding: 8px 20px;
+    background: #001020;
+    color: #0ff;
+    border: 1px solid #0ff;
+    cursor: pointer;
+}
