@@ -8,8 +8,27 @@ export default class MainScene extends Phaser.Scene {
     }
 
     create() {
-        // Placeholder game text
-        this.add.text(400, 300, 'Game Scene', { fontSize: '32px', color: '#FFFFFF' }).setOrigin(0.5);
+        const { width, height } = this.scale;
+
+        this.infoText = this.add
+            .text(0, 0, 'Game Scene', {
+                fontFamily: 'Orbitron',
+                color: '#FFFFFF',
+                stroke: '#0ff',
+                strokeThickness: 2,
+            })
+            .setOrigin(0.5);
+
+        this.resizeUI({ width, height });
+
+        this.scale.on('resize', this.resizeUI, this);
+    }
+
+    resizeUI(gameSize) {
+        const { width, height } = gameSize;
+        const size = Math.max(20, Math.min(48, height * 0.05));
+        this.infoText.setFontSize(size);
+        this.infoText.setPosition(width / 2, height / 2);
     }
 
     update() {
