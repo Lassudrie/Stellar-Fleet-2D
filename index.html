@@ -14,11 +14,23 @@
     <div class="menu-container" id="menu">
         <div class="logo"></div>
         <h1 class="title">Stellar Fleet 2D</h1>
-        <a href="game.html" class="menu-btn">New Game</a>
+        <button id="newGameBtn" class="menu-btn">New Game</button>
         <button class="menu-btn" onclick="window.close()">Quit</button>
     </div>
+    <div id="game-container"></div>
     <div class="version">v0.1 Alpha</div>
-    <script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/phaser@3/dist/phaser.js"></script>
+    <script type="module">
+        import { startGame } from './main.js';
+
+        const menu = document.getElementById('menu');
+        const gameContainer = document.getElementById('game-container');
+        document.getElementById('newGameBtn').addEventListener('click', () => {
+            menu.style.display = 'none';
+            gameContainer.style.display = 'block';
+            startGame(gameContainer);
+        });
+
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('service-worker.js');
         }
