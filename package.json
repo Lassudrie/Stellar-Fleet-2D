@@ -1,0 +1,18 @@
+{
+  "name": "stellar-fleet-2d",
+  "version": "1.0.0",
+  "description": "Prototype Phaser 3 project structured as a **single page application**.",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^30.0.4",
+    "jest-environment-jsdom": "^30.0.4",
+    "jsdom": "^26.1.0"
+  }
+}
