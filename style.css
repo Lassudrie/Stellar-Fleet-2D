@@ -4,13 +4,14 @@
 html, body {
     margin: 0;
     padding: 0;
-    width: 100%;
+    width: 100vw;
     height: 100%;
     background: #0b0f1a url('assets/main menu.png') no-repeat center/cover;
     color: #e0e0e0;
     font-family: 'Orbitron', 'Rajdhani', sans-serif;
     overflow-x: hidden;
     position: relative;
+    touch-action: pan-y;
 }
 
 body::before {
@@ -123,12 +124,14 @@ body::after {
 /* Section containers for one-page navigation */
 .section {
     width: 100%;
-    height: 100vh;
-    height: 100dvh;
+    min-height: 100vh;
+    min-height: 100dvh;
     display: none;
     padding-top: 40px;
     box-sizing: border-box;
     text-align: center;
+    overflow-y: auto;
+    touch-action: pan-y;
 }
 
 .section h2 {
