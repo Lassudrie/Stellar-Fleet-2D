@@ -8,6 +8,33 @@
     --border-radius: 8px;
     --font-base: 'Orbitron', 'Rajdhani', sans-serif;
     --transition-fast: 0.3s;
+
+    /* Mobile typography scale */
+    --font-xs: 0.75rem;
+    --font-sm: 0.875rem;
+    --font-base-size: 1rem;
+    --font-lg: 1.125rem;
+    --font-xl: 1.25rem;
+
+    /* Line height presets */
+    --line-height-tight: 1.2;
+    --line-height-normal: 1.4;
+    --line-height-relaxed: 1.6;
+
+    /* Spacing system */
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 0.75rem;
+    --space-lg: 1rem;
+    --space-xl: 1.5rem;
+
+    /* Viewport helpers */
+    --viewport-width: 100vw;
+    --viewport-height: 100vh;
+    --safe-top: env(safe-area-inset-top);
+    --safe-right: env(safe-area-inset-right);
+    --safe-bottom: env(safe-area-inset-bottom);
+    --safe-left: env(safe-area-inset-left);
 }
 
 @media (prefers-color-scheme: light) {
@@ -47,12 +74,13 @@ html {
 
 body {
     margin: 0;
-    padding: 0;
-    width: 100vw;
-    height: 100%;
+    padding: var(--safe-top) var(--safe-right) var(--safe-bottom) var(--safe-left);
+    width: var(--viewport-width);
+    min-height: var(--viewport-height);
     background: var(--color-bg) url('assets/main menu.png') no-repeat center/cover;
     color: var(--color-text);
     font-family: var(--font-base);
+    font-size: var(--font-base-size);
     overflow-x: hidden;
     position: relative;
     touch-action: pan-y;
@@ -110,12 +138,13 @@ body::after {
 
 /* Layout container to center sections */
 .page-container {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
     justify-content: flex-start;
     min-height: 100vh;
-    padding: 1rem;
+    padding: var(--space-lg);
     box-sizing: border-box;
     overflow-x: hidden;
     contain: layout paint;
@@ -125,6 +154,7 @@ body::after {
 .menu-container {
     position: relative;
     z-index: 1;
+    width: 100%;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -140,13 +170,13 @@ body::after {
     border: 2px solid var(--color-primary);
     border-radius: 50%;
     opacity: 0.2;
-    margin-bottom: 20px;
+    margin-bottom: var(--space-lg);
 }
 
 .title {
-    font-size: clamp(32px, 8vw, 72px);
+    font-size: clamp(1.5rem, 8vw, 3rem);
     font-weight: 600;
-    margin: 0 0 40px 0;
+    margin: 0 0 var(--space-xl) 0;
     color: var(--color-primary);
     text-shadow: 0 0 15px var(--color-primary);
 }
@@ -156,12 +186,13 @@ body::after {
     color: var(--color-primary);
     border: 2px solid var(--color-primary);
     background: rgba(0, 0, 0, 0.4);
-    padding: 12px 40px;
-    margin: 8px 0;
-    width: 220px;
+    padding: var(--space-sm) var(--space-xl);
+    margin: var(--space-xs) 0;
+    width: min(200px, 80vw);
+    min-height: 44px;
     text-align: center;
-    border-radius: var(--border-radius);
-    font-size: clamp(16px, 2.5vw, 24px);
+    border-radius: 6px;
+    font-size: var(--font-sm);
     letter-spacing: 2px;
     text-transform: uppercase;
     cursor: pointer;
@@ -185,11 +216,10 @@ body::after {
 
 /* Section containers for one-page navigation */
 .section {
-    width: 100%;
-    min-height: 100vh;
-    min-height: 100dvh;
+    width: 100vw;
+    min-height: var(--viewport-height);
     display: none;
-    padding-top: 40px;
+    padding-top: var(--space-lg);
     box-sizing: border-box;
     text-align: center;
     overflow-y: auto;
@@ -209,15 +239,14 @@ body::after {
     flex-direction: column;
     width: 100%;
     height: 100%;
-    padding: 20px;
+    padding: var(--space-lg);
     box-sizing: border-box;
 }
 
 /* Existing game styles */
 #game-container {
-    width: 100%;
-    height: 100vh;
-    height: 100dvh;
+    width: 100vw;
+    height: var(--viewport-height);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -233,15 +262,14 @@ canvas {
 }
 
 .form-container {
-    width: 80%;
-    max-width: 420px;
+    width: 100%;
+    max-width: 400px;
     max-height: 90vh;
-    max-height: 90dvh;
     overflow-y: auto;
     background: rgba(11, 15, 26, 0.9);
-    padding: 20px;
+    padding: var(--space-md);
     border: 2px solid var(--color-primary);
-    border-radius: var(--border-radius);
+    border-radius: 6px;
     box-shadow: 0 0 12px rgba(0, 255, 224, 0.2);
     color: var(--color-text);
     font-family: var(--font-base);
@@ -249,20 +277,20 @@ canvas {
 }
 .form-container h2 {
     margin-top: 0;
-    margin-bottom: 16px;
+    margin-bottom: var(--space-md);
     color: var(--color-primary);
     text-align: center;
 }
 .form-container label {
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: var(--space-sm);
 }
 .form-container input,
 .form-container select {
     width: 100%;
-    margin-top: 4px;
-    margin-bottom: 12px;
-    padding: 6px 8px;
+    margin-top: var(--space-xs);
+    margin-bottom: var(--space-md);
+    padding: var(--space-xs) var(--space-sm);
     background: #0b0f1a;
     color: var(--color-text);
     border: 1px solid var(--color-primary);
@@ -272,7 +300,7 @@ canvas {
 .form-container button {
     display: block;
     margin: 0 auto;
-    padding: 8px 20px;
+    padding: var(--space-sm) var(--space-lg);
     background: #001020;
     color: var(--color-primary);
     border: 1px solid var(--color-primary);
@@ -290,7 +318,7 @@ canvas {
 
 /* Civilization carousel */
 .civ-selector {
-    --card-width: min(400px, 85vw);
+    --card-width: min(300px, 75vw);
     width: 100%;
     overflow: hidden;
     margin: 0 auto 12px;
@@ -303,9 +331,11 @@ canvas {
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
-    gap: 1rem;
-    padding: 1rem 0;
+    gap: var(--space-md);
+    padding: var(--space-md) 0;
     width: 100%;
+    content-visibility: auto;
+    contain-intrinsic-size: 200px;
 }
 
 .civ-selector .civ-container::-webkit-scrollbar {
@@ -318,8 +348,8 @@ canvas {
     margin: 0 auto;
     box-sizing: border-box;
     border: 2px solid var(--color-primary);
-    border-radius: 15px;
-    padding: 1rem;
+    border-radius: 6px;
+    padding: var(--space-md);
     background: rgba(0, 0, 0, 0.8);
     color: #e0e0e0;
     box-shadow: 0 0 8px rgba(0, 255, 224, 0.2);
@@ -343,7 +373,8 @@ canvas {
 .civ-selector .civ-card img {
     max-width: 100%;
     height: auto;
-    border-radius: 10px;
+    border-radius: 6px;
+    aspect-ratio: 4 / 3;
 }
 
 @media (min-width: 600px) {
@@ -361,7 +392,7 @@ canvas {
 @media (max-width: 600px) {
     .form-container {
         width: 100%;
-        padding: 16px;
+        padding: var(--space-md);
     }
 }
 
