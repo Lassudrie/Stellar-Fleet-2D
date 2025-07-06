@@ -15,9 +15,16 @@
         <div class="logo"></div>
         <h1 class="title">Stellar Fleet 2D</h1>
         <button id="newGameBtn" class="menu-btn">New Game</button>
+        <button id="loadGameBtn" class="menu-btn">Load Game</button>
         <button id="codexBtn" class="menu-btn">Codex</button>
         <button id="creditsBtn" class="menu-btn">Credits</button>
         <button class="menu-btn" onclick="window.close()">Quit</button>
+    </div>
+    <div id="loadGame" class="section">
+        <h2>Load Game</h2>
+        <p id="saveInfo">No saved game found.</p>
+        <button id="loadLastBtn" class="menu-btn">Load Last Game</button>
+        <button id="backLoad" class="menu-btn">Back</button>
     </div>
     <div id="codex" class="section">
         <h2>Codex</h2>
@@ -39,21 +46,46 @@
         const gameContainer = document.getElementById('game-container');
         const codex = document.getElementById('codex');
         const credits = document.getElementById('credits');
+        const loadGameSection = document.getElementById('loadGame');
 
-        const sections = { menu, game: gameContainer, codex, credits };
+        const sections = { menu, game: gameContainer, codex, credits, load: loadGameSection };
         function showSection(name) {
             Object.values(sections).forEach(el => (el.style.display = 'none'));
             sections[name].style.display = 'block';
         }
 
+        const saveInfo = document.getElementById('saveInfo');
+        const loadLastBtn = document.getElementById('loadLastBtn');
+
         document.getElementById('newGameBtn').addEventListener('click', () => {
             showSection('game');
             startGame(gameContainer);
+        });
+        document.getElementById('loadGameBtn').addEventListener('click', () => {
+            const data = localStorage.getItem('lastGame');
+            if (data) {
+                const setup = JSON.parse(data);
+                saveInfo.textContent = `Last empire: ${setup.empireName}`;
+                loadLastBtn.disabled = false;
+            } else {
+                saveInfo.textContent = 'No saved game found.';
+                loadLastBtn.disabled = true;
+            }
+            showSection('load');
+        });
+        loadLastBtn.addEventListener('click', () => {
+            const data = localStorage.getItem('lastGame');
+            if (data) {
+                const setup = JSON.parse(data);
+                showSection('game');
+                startGame(gameContainer, setup);
+            }
         });
         document.getElementById('codexBtn').addEventListener('click', () => showSection('codex'));
         document.getElementById('creditsBtn').addEventListener('click', () => showSection('credits'));
         document.getElementById('backCodex').addEventListener('click', () => showSection('menu'));
         document.getElementById('backCredits').addEventListener('click', () => showSection('menu'));
+        document.getElementById('backLoad').addEventListener('click', () => showSection('menu'));
 
         showSection('menu');
 

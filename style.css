@@ -12,6 +12,31 @@ html, body {
     position: relative;
 }
 
+body::before {
+    content: '';
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    background-image:
+        radial-gradient(1px 1px at 20% 30%, #ffffff, transparent),
+        radial-gradient(1px 1px at 40% 70%, #ffffff, transparent),
+        radial-gradient(1px 1px at 60% 40%, #ffffff, transparent),
+        radial-gradient(1px 1px at 80% 80%, #ffffff, transparent);
+    background-size: 800px 800px;
+    animation: starScroll 60s linear infinite;
+    opacity: 0.6;
+    z-index: 0;
+}
+
+@keyframes starScroll {
+    from {
+        transform: translate(0, 0);
+    }
+    to {
+        transform: translate(-200px, -200px);
+    }
+}
+
 body::after {
     content: '';
     pointer-events: none;

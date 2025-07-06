@@ -54,6 +54,7 @@ export default class SetupScene extends Phaser.Scene {
             this.setupData.civilization = this.form.getChildByID('civilization').value;
             this.setupData.leaderName = this.form.getChildByID('leaderName').value;
             this.setupData.leader = this.form.getChildByID('leader').value;
+            localStorage.setItem('lastGame', JSON.stringify(this.setupData));
             this.scene.start('MainScene', { setupData: this.setupData });
         });
 
