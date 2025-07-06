@@ -1,4 +1,5 @@
 import EmpireSetup from '../dataclasses/EmpireSetup.js';
+import { initCivilizationCarousel } from '../logic/setupLogic.js';
 
 export default class SetupScene extends Phaser.Scene {
     constructor() {
@@ -24,11 +25,7 @@ export default class SetupScene extends Phaser.Scene {
                 </div>
                 <div>
                     <label>Civilization:<br>
-                        <select id="civilization">
-                            <option value="Terran">Terran</option>
-                            <option value="Martian">Martian</option>
-                            <option value="Alien">Alien</option>
-                        </select>
+                        <div id="civSelector" class="civ-selector"></div>
                     </label>
                 </div>
                 <div>
@@ -47,6 +44,9 @@ export default class SetupScene extends Phaser.Scene {
             </div>`;
 
         this.form = this.add.dom(width / 2, height / 2).createFromHTML(formHtml);
+
+        const civContainer = this.form.getChildByID('civSelector');
+        initCivilizationCarousel(civContainer);
 
         const startBtn = this.form.getChildByID('startBtn');
         startBtn.addEventListener('click', () => {
