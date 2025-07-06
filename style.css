@@ -129,6 +129,8 @@ body::after {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    width: 100%;
+    height: 100%;
     padding: 20px;
     box-sizing: border-box;
 }
@@ -255,8 +257,9 @@ canvas {
 
 .civ-selector .civ-card img {
     width: 100%;
-    height: 180px;
-    object-fit: cover;
+    max-height: 180px;
+    height: auto;
+    object-fit: contain;
     border-radius: 8px 8px 0 0;
 }
 

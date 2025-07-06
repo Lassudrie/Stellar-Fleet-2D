@@ -45,7 +45,10 @@ export default class SetupScene extends Phaser.Scene {
                 </div>
             </div>`;
 
-        this.form = this.add.dom(width / 2, height / 2).createFromHTML(formHtml);
+        this.form = this.add
+            .dom(width / 2, height / 2)
+            .createFromHTML(formHtml)
+            .setOrigin(0.5);
 
         const civContainer = this.form.getChildByID('civSelector');
         initCivilizationCarousel(civContainer);
