@@ -3,8 +3,14 @@ import MainScene from './scenes/MainScene.js';
 
 let game;
 
-export function startGame(parentId = 'game-container') {
-    if (game) return game;
+export function startGame(parentId = 'game-container', setupData = null) {
+    if (game) {
+        if (setupData) {
+            game.scene.stop('SetupScene');
+            game.scene.start('MainScene', { setupData });
+        }
+        return game;
+    }
 
     const config = {
         type: Phaser.AUTO,
@@ -24,6 +30,11 @@ export function startGame(parentId = 'game-container') {
     };
 
     game = new Phaser.Game(config);
+
+    if (setupData) {
+        game.scene.stop('SetupScene');
+        game.scene.start('MainScene', { setupData });
+    }
 
     window.addEventListener('resize', () => {
         game.scale.resize(window.innerWidth, window.innerHeight);

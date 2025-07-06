@@ -26,3 +26,13 @@ Hovering over each option triggers subtle UI animations and ambient sounds, rein
 
 ## Setup Scene
 
+The setup form gathers the initial empire information. When the player starts a game this data is stored in `localStorage` so it can be loaded later from the **Load Game** menu.
+
+## Load Game
+
+Selecting **Load Game** displays a simple page showing the last saved empire if one exists. Clicking **Load Last Game** immediately starts the main scene with that saved configuration.
+
+## Animated Background
+
+The main menu now includes a lightweight CSS starfield that scrolls slowly across the screen, providing a subtle sense of motion behind the static galaxy image.
+
