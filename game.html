@@ -8,14 +8,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <!-- Phaser 3 via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3/dist/phaser.js"></script>
 </head>
 <body>
-    <div class="menu-container" id="menu">
-        <div class="logo"></div>
-        <h1 class="title">Stellar Fleet 2D</h1>
-        <a href="game.html" class="menu-btn">New Game</a>
-        <button class="menu-btn" onclick="window.close()">Quit</button>
-    </div>
-    <div class="version">v0.1 Alpha</div>
+    <div id="game-container"></div>
+    <script type="module" src="main.js"></script>
 </body>
 </html>
