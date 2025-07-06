@@ -189,19 +189,20 @@ canvas {
 
 /* Civilization carousel */
 .civ-selector {
+    --card-width: min(320px, 80vw);
     width: 100%;
     overflow: hidden;
-    margin-bottom: 12px;
+    margin: 0 auto 12px;
 }
 
 .civ-selector .civ-container {
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
-    user-select: none;
     gap: 10px;
-    padding-bottom: 10px;
+    padding: 10px calc((100% - var(--card-width)) / 2);
 }
 
 .civ-selector .civ-container::-webkit-scrollbar {
@@ -209,16 +210,22 @@ canvas {
 }
 
 .civ-selector .civ-card {
-    flex: 0 0 80%;
-    max-width: 320px;
-    margin: 0 10px;
-    background: #ffffff;
-    color: #000000;
+    flex: 0 0 var(--card-width);
+    max-width: var(--card-width);
+    margin: 0;
+    background: rgba(255, 255, 255, 0.1);
+    color: #e0e0e0;
     border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 8px rgba(0, 255, 224, 0.2);
     text-align: center;
     scroll-snap-align: center;
     cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.civ-selector .civ-card.active {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #00ffe0;
 }
 
 .civ-selector .civ-card.selected {
@@ -234,7 +241,7 @@ canvas {
 
 @media (min-width: 600px) {
     .civ-selector .civ-card {
-        flex-basis: 40%;
+        flex-basis: var(--card-width);
     }
 }
 

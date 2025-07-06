@@ -61,44 +61,23 @@ export function initCivilizationCarousel(root, civilizations = defaultCivilizati
     });
   });
 
-  // swipe scrolling behaviour
-  let cardWidth = 0;
-  const first = cards[0];
-  if (first) {
-    const style = getComputedStyle(first);
-    const margin = parseFloat(style.marginLeft) + parseFloat(style.marginRight);
-    cardWidth = first.getBoundingClientRect().width + margin;
-  }
-  let isDown = false;
-  let startX = 0;
-  let scrollStart = 0;
-  const getX = (e) => (e.touches ? e.touches[0].clientX : e.clientX);
-  const onDown = (e) => {
-    isDown = true;
-    startX = getX(e);
-    scrollStart = container.scrollLeft;
+  const updateActive = () => {
+    const center = container.scrollLeft + container.clientWidth / 2;
+    let active = null;
+    let min = Infinity;
+    cards.forEach((card) => {
+      const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+      const diff = Math.abs(center - cardCenter);
+      if (diff < min) {
+        min = diff;
+        active = card;
+      }
+    });
+    cards.forEach((c) => c.classList.toggle('active', c === active));
   };
-  const onMove = (e) => {
-    if (!isDown) return;
-    container.scrollLeft = scrollStart + (startX - getX(e));
-    e.preventDefault();
-  };
-  const onUp = () => {
-    if (!isDown) return;
-    isDown = false;
-    if (cardWidth) {
-      const index = Math.round(container.scrollLeft / cardWidth);
-      container.scrollTo({ left: index * cardWidth, behavior: 'smooth' });
-    }
-  };
-  container.addEventListener('mousedown', onDown);
-  container.addEventListener('touchstart', onDown);
-  container.addEventListener('mousemove', onMove);
-  container.addEventListener('touchmove', onMove, { passive: false });
-  window.addEventListener('mouseup', onUp);
-  window.addEventListener('mouseleave', onUp);
-  window.addEventListener('touchend', onUp);
-  window.addEventListener('touchcancel', onUp);
+
+  container.addEventListener('scroll', () => requestAnimationFrame(updateActive));
+  updateActive();
 
   return hidden;
 }
