@@ -15,9 +15,21 @@
         <div class="logo"></div>
         <h1 class="title">Stellar Fleet 2D</h1>
         <button id="newGameBtn" class="menu-btn">New Game</button>
+        <button id="codexBtn" class="menu-btn">Codex</button>
+        <button id="creditsBtn" class="menu-btn">Credits</button>
         <button class="menu-btn" onclick="window.close()">Quit</button>
     </div>
-    <div id="game-container"></div>
+    <div id="codex" class="section">
+        <h2>Codex</h2>
+        <p>Welcome to the codex. Here you can find background lore.</p>
+        <button id="backCodex" class="menu-btn">Back</button>
+    </div>
+    <div id="credits" class="section">
+        <h2>Credits</h2>
+        <p>Stellar Fleet 2D Prototype</p>
+        <button id="backCredits" class="menu-btn">Back</button>
+    </div>
+    <div id="game-container" class="section"></div>
     <div class="version">v0.1 Alpha</div>
     <script type="module" src="https://cdn.jsdelivr.net/npm/phaser@3/dist/phaser.js"></script>
     <script type="module">
@@ -25,11 +37,25 @@
 
         const menu = document.getElementById('menu');
         const gameContainer = document.getElementById('game-container');
+        const codex = document.getElementById('codex');
+        const credits = document.getElementById('credits');
+
+        const sections = { menu, game: gameContainer, codex, credits };
+        function showSection(name) {
+            Object.values(sections).forEach(el => (el.style.display = 'none'));
+            sections[name].style.display = 'block';
+        }
+
         document.getElementById('newGameBtn').addEventListener('click', () => {
-            menu.style.display = 'none';
-            gameContainer.style.display = 'block';
+            showSection('game');
             startGame(gameContainer);
         });
+        document.getElementById('codexBtn').addEventListener('click', () => showSection('codex'));
+        document.getElementById('creditsBtn').addEventListener('click', () => showSection('credits'));
+        document.getElementById('backCodex').addEventListener('click', () => showSection('menu'));
+        document.getElementById('backCredits').addEventListener('click', () => showSection('menu'));
+
+        showSection('menu');
 
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('service-worker.js');

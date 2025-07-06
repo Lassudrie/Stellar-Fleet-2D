@@ -80,12 +80,26 @@ body::after {
     z-index: 1;
 }
 
+/* Section containers for one-page navigation */
+.section {
+    width: 100%;
+    height: 100vh;
+    display: none;
+    padding-top: 40px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.section h2 {
+    margin-top: 0;
+    color: #00ffe0;
+}
+
 /* Existing game styles */
 #game-container {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    display: none;
 }
 
 canvas {
