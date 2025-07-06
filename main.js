@@ -1,4 +1,3 @@
-import MainMenu from './ui/MainMenu.js';
 import SetupScene from './scenes/SetupScene.js';
 import MainScene from './scenes/MainScene.js';
 
@@ -16,7 +15,7 @@ const config = {
     dom: {
         createContainer: true,
     },
-    scene: [MainMenu, SetupScene, MainScene],
+    scene: [SetupScene, MainScene],
 };
 
 const game = new Phaser.Game(config);
