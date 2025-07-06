@@ -18,7 +18,8 @@ export default class SetupScene extends Phaser.Scene {
         this.setupData = new EmpireSetup();
 
         const formHtml = `
-            <div class="form-container">
+            <div class="setup-wrapper">
+                <div class="form-container">
                 <h2>New Empire Setup</h2>
                 <div>
                     <label>Empire Name:<br><input type="text" id="empireName" /></label>
@@ -41,6 +42,7 @@ export default class SetupScene extends Phaser.Scene {
                     </label>
                 </div>
                 <button id="startBtn">Start Game</button>
+                </div>
             </div>`;
 
         this.form = this.add.dom(width / 2, height / 2).createFromHTML(formHtml);
