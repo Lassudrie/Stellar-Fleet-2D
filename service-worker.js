@@ -2,7 +2,6 @@ const CACHE_NAME = 'stellar-fleet-cache-v1';
 const ASSETS = [
   '/',
   'index.html',
-  'game.html',
   'main.js',
   'style.css',
   'manifest.json',

@@ -2,7 +2,7 @@
 
 Prototype Phaser 3 project structure.
 
-Open `index.html` to access the HTML main menu. Clicking **New Game** loads `game.html` which now opens directly on the empire setup form.
+Open `index.html` to access the HTML main menu. Clicking **New Game** now starts the Phaser game directly on the empire setup form without leaving the page.
 
 ## Progressive Web App
 

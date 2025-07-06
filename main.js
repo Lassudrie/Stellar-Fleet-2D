@@ -1,26 +1,34 @@
 import SetupScene from './scenes/SetupScene.js';
 import MainScene from './scenes/MainScene.js';
 
-const config = {
-    type: Phaser.AUTO,
-    parent: 'game-container',
-    width: window.innerWidth,
-    height: window.innerHeight,
-    resolution: window.devicePixelRatio || 1,
-    pixelArt: true,
-    scale: {
-        mode: Phaser.Scale.FIT,
-        autoCenter: Phaser.Scale.CENTER_BOTH,
-    },
-    dom: {
-        createContainer: true,
-    },
-    scene: [SetupScene, MainScene],
-};
+let game;
 
-const game = new Phaser.Game(config);
+export function startGame(parentId = 'game-container') {
+    if (game) return game;
 
-window.addEventListener('resize', () => {
-    game.scale.resize(window.innerWidth, window.innerHeight);
-});
+    const config = {
+        type: Phaser.AUTO,
+        parent: parentId,
+        width: window.innerWidth,
+        height: window.innerHeight,
+        resolution: window.devicePixelRatio || 1,
+        pixelArt: true,
+        scale: {
+            mode: Phaser.Scale.FIT,
+            autoCenter: Phaser.Scale.CENTER_BOTH,
+        },
+        dom: {
+            createContainer: true,
+        },
+        scene: [SetupScene, MainScene],
+    };
+
+    game = new Phaser.Game(config);
+
+    window.addEventListener('resize', () => {
+        game.scale.resize(window.innerWidth, window.innerHeight);
+    });
+
+    return game;
+}
 
