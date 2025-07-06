@@ -2,21 +2,19 @@
  * Default civilizations displayed in the setup carousel.
  * @type {{name:string, description:string, image:string}[]}
  */
+import humans from '../dataclasses/Humans.js';
+import zelvans from '../dataclasses/Zelvans.js';
+
 export const defaultCivilizations = [
   {
-    name: 'Terran',
-    description: 'Hardy settlers from Earth.',
-    image: 'assets/main menu.png'
+    name: humans.name,
+    description: humans.background,
+    image: humans.avatar
   },
   {
-    name: 'Martian',
-    description: 'Colonists forged on Mars.',
-    image: 'assets/main menu.png'
-  },
-  {
-    name: 'Alien',
-    description: 'Mysterious visitors from afar.',
-    image: 'assets/main menu.png'
+    name: zelvans.name,
+    description: zelvans.background,
+    image: zelvans.avatar
   }
 ];
 
