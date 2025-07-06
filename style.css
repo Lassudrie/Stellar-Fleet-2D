@@ -123,6 +123,16 @@ body::after {
     color: #00ffe0;
 }
 
+/* Wrapper used in SetupScene to center the form */
+.setup-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
 /* Existing game styles */
 #game-container {
     width: 100%;
@@ -155,6 +165,7 @@ canvas {
     box-shadow: 0 0 12px rgba(0, 255, 224, 0.2);
     color: #e0e0e0;
     font-family: 'Orbitron', 'Rajdhani', sans-serif;
+    box-sizing: border-box;
 }
 .form-container h2 {
     margin-top: 0;
@@ -252,6 +263,13 @@ canvas {
 @media (min-width: 600px) {
     .civ-selector .civ-card {
         flex-basis: var(--card-width);
+    }
+}
+
+@media (max-width: 600px) {
+    .form-container {
+        width: 100%;
+        padding: 16px;
     }
 }
 
