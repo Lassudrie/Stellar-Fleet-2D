@@ -83,6 +83,8 @@ body::after {
     background: rgba(0, 0, 0, 0.4);
     padding: 12px 40px;
     margin: 8px 0;
+    width: 220px;
+    text-align: center;
     border-radius: 8px;
     font-size: clamp(16px, 2.5vw, 24px);
     letter-spacing: 2px;
