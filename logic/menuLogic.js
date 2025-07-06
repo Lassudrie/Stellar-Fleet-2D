@@ -20,7 +20,7 @@ export function clamp(value, min, max) {
 export function createMenuButton(root, label, callback, fontSize = 28) {
     const button = document.createElement('button');
     button.textContent = label;
-    button.style.fontFamily = 'Orbitron';
+    button.style.fontFamily = 'Arial, sans-serif';
     button.style.fontSize = `${fontSize}px`;
     button.className = 'menu-btn';
     button.addEventListener('click', callback);
