@@ -1,17 +1,69 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600&display=swap');
+/* -------------------------------------------------------------------------- */
+/* Custom Properties                                                          */
+/* -------------------------------------------------------------------------- */
+:root {
+    --color-bg: #0b0f1a;
+    --color-primary: #00ffe0;
+    --color-text: #e0e0e0;
+    --border-radius: 8px;
+    --font-base: 'Orbitron', 'Rajdhani', sans-serif;
+    --transition-fast: 0.3s;
+}
 
-html, body {
+@media (prefers-color-scheme: light) {
+    :root {
+        --color-bg: #f5f5f5;
+        --color-text: #222222;
+    }
+}
+
+@media (prefers-contrast: more) {
+    :root {
+        --color-primary: #00fff2;
+    }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Reset & Base styles                                                        */
+/* -------------------------------------------------------------------------- */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+body {
     margin: 0;
     padding: 0;
     width: 100vw;
     height: 100%;
-    background: #0b0f1a url('assets/main menu.png') no-repeat center/cover;
-    color: #e0e0e0;
-    font-family: 'Orbitron', 'Rajdhani', sans-serif;
+    background: var(--color-bg) url('assets/main menu.png') no-repeat center/cover;
+    color: var(--color-text);
+    font-family: var(--font-base);
     overflow-x: hidden;
     position: relative;
     touch-action: pan-y;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
 }
 
 body::before {
@@ -27,15 +79,22 @@ body::before {
     background-size: 800px 800px;
     animation: starScroll 60s linear infinite;
     opacity: 0.6;
+    will-change: transform;
     z-index: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body::before {
+        animation: none;
+    }
 }
 
 @keyframes starScroll {
     from {
-        transform: translate(0, 0);
+        transform: translate3d(0, 0, 0);
     }
     to {
-        transform: translate(-200px, -200px);
+        transform: translate3d(-200px, -200px, 0);
     }
 }
 
@@ -59,6 +118,7 @@ body::after {
     padding: 1rem;
     box-sizing: border-box;
     overflow-x: hidden;
+    contain: layout paint;
 }
 
 /* Main menu layout */
@@ -71,12 +131,13 @@ body::after {
     justify-content: center;
     align-items: center;
     text-align: center;
+    contain: layout paint;
 }
 
 .logo {
     width: 150px;
     height: 150px;
-    border: 2px solid #00ffe0;
+    border: 2px solid var(--color-primary);
     border-radius: 50%;
     opacity: 0.2;
     margin-bottom: 20px;
@@ -86,30 +147,31 @@ body::after {
     font-size: clamp(32px, 8vw, 72px);
     font-weight: 600;
     margin: 0 0 40px 0;
-    color: #00ffe0;
-    text-shadow: 0 0 15px #00ffe0;
+    color: var(--color-primary);
+    text-shadow: 0 0 15px var(--color-primary);
 }
 
 .menu-btn {
     text-decoration: none;
-    color: #00ffe0;
-    border: 2px solid #00ffe0;
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
     background: rgba(0, 0, 0, 0.4);
     padding: 12px 40px;
     margin: 8px 0;
     width: 220px;
     text-align: center;
-    border-radius: 8px;
+    border-radius: var(--border-radius);
     font-size: clamp(16px, 2.5vw, 24px);
     letter-spacing: 2px;
     text-transform: uppercase;
     cursor: pointer;
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    will-change: transform;
 }
 
 .menu-btn:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 20px #00ffe0;
+    box-shadow: 0 0 20px var(--color-primary);
 }
 
 .version {
@@ -136,7 +198,7 @@ body::after {
 
 .section h2 {
     margin-top: 0;
-    color: #00ffe0;
+    color: var(--color-primary);
 }
 
 /* Wrapper used in SetupScene to center the form */
@@ -178,17 +240,17 @@ canvas {
     overflow-y: auto;
     background: rgba(11, 15, 26, 0.9);
     padding: 20px;
-    border: 2px solid #00ffe0;
-    border-radius: 8px;
+    border: 2px solid var(--color-primary);
+    border-radius: var(--border-radius);
     box-shadow: 0 0 12px rgba(0, 255, 224, 0.2);
-    color: #e0e0e0;
-    font-family: 'Orbitron', 'Rajdhani', sans-serif;
+    color: var(--color-text);
+    font-family: var(--font-base);
     box-sizing: border-box;
 }
 .form-container h2 {
     margin-top: 0;
     margin-bottom: 16px;
-    color: #00ffe0;
+    color: var(--color-primary);
     text-align: center;
 }
 .form-container label {
@@ -202,28 +264,28 @@ canvas {
     margin-bottom: 12px;
     padding: 6px 8px;
     background: #0b0f1a;
-    color: #e0e0e0;
-    border: 1px solid #00ffe0;
+    color: var(--color-text);
+    border: 1px solid var(--color-primary);
     border-radius: 4px;
-    transition: box-shadow 0.3s;
+    transition: box-shadow var(--transition-fast);
 }
 .form-container button {
     display: block;
     margin: 0 auto;
     padding: 8px 20px;
     background: #001020;
-    color: #00ffe0;
-    border: 1px solid #00ffe0;
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
     border-radius: 4px;
     cursor: pointer;
-    transition: box-shadow 0.3s;
+    transition: box-shadow var(--transition-fast);
 }
 .form-container input:hover,
 .form-container input:focus,
 .form-container select:hover,
 .form-container select:focus,
 .form-container button:hover {
-    box-shadow: 0 0 8px #00ffe0;
+    box-shadow: 0 0 8px var(--color-primary);
 }
 
 /* Civilization carousel */
@@ -232,6 +294,7 @@ canvas {
     width: 100%;
     overflow: hidden;
     margin: 0 auto 12px;
+    container-type: inline-size;
 }
 
 .civ-selector .civ-container {
@@ -254,7 +317,7 @@ canvas {
     max-width: var(--card-width);
     margin: 0 auto;
     box-sizing: border-box;
-    border: 2px solid cyan;
+    border: 2px solid var(--color-primary);
     border-radius: 15px;
     padding: 1rem;
     background: rgba(0, 0, 0, 0.8);
@@ -263,16 +326,18 @@ canvas {
     text-align: center;
     scroll-snap-align: center;
     cursor: pointer;
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    contain: layout paint;
+    will-change: transform;
 }
 
 .civ-selector .civ-card.active {
     transform: scale(1.05);
-    box-shadow: 0 0 15px #00ffe0;
+    box-shadow: 0 0 15px var(--color-primary);
 }
 
 .civ-selector .civ-card.selected {
-    border: 2px solid #00ffe0;
+    border: 2px solid var(--color-primary);
 }
 
 .civ-selector .civ-card img {
@@ -282,6 +347,12 @@ canvas {
 }
 
 @media (min-width: 600px) {
+    .civ-selector .civ-card {
+        flex-basis: var(--card-width);
+    }
+}
+
+@container (min-width: 600px) {
     .civ-selector .civ-card {
         flex-basis: var(--card-width);
     }
