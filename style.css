@@ -318,7 +318,7 @@ canvas {
 
 /* Civilization carousel */
 .civ-selector {
-    --card-width: min(300px, 75vw);
+    --card-width: min(240px, 60vw);
     width: 100%;
     overflow: hidden;
     margin: 0 auto 12px;
@@ -374,7 +374,7 @@ canvas {
     max-width: 100%;
     height: auto;
     border-radius: 6px;
-    aspect-ratio: 4 / 3;
+    object-fit: contain;
 }
 
 @media (min-width: 600px) {
