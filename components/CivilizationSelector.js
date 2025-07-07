@@ -9,6 +9,15 @@ import './CivilizationSelector.css';
 export default function CivilizationSelector({ civilizations = [], onSelect }) {
   const containerRef = useRef(null);
   const [cardWidth, setCardWidth] = useState(0);
+  // side padding to center first card
+  const setSidePadding = () => {
+    const container = containerRef.current;
+    if (!container || !cardWidth) return;
+    const width = container.offsetWidth;
+    const padding = Math.max(0, (width - cardWidth) / 2);
+    container.style.paddingLeft = `${padding}px`;
+    container.style.paddingRight = `${padding}px`;
+  };
   const isDown = useRef(false);
   const startX = useRef(0);
   const startY = useRef(0);
@@ -22,6 +31,12 @@ export default function CivilizationSelector({ civilizations = [], onSelect }) {
       setCardWidth(first.getBoundingClientRect().width + margin);
     }
   }, [civilizations]);
+
+  useEffect(() => {
+    setSidePadding();
+    window.addEventListener('resize', setSidePadding);
+    return () => window.removeEventListener('resize', setSidePadding);
+  }, [cardWidth]);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -77,6 +92,7 @@ export default function CivilizationSelector({ civilizations = [], onSelect }) {
 
   return (
     <div className="civ-selector">
+      <h2 className="civ-title">Choose civilization</h2>
       <div className="civ-container" ref={containerRef}>
         {civilizations.map((civ, idx) => (
           <div className="civ-card" key={idx}>
