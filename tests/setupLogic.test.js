@@ -30,6 +30,10 @@ describe('initCivilizationCarousel', () => {
     expect(hidden.id).toBe('civilization');
     expect(hidden.value).toBe('A');
     expect(cards[0].classList.contains('selected')).toBe(true);
+
+    const dots = root.querySelectorAll('.civ-dot');
+    expect(dots.length).toBe(2);
+    expect(dots[0].classList.contains('active')).toBe(true);
   });
 
   test('clicking card updates selection', () => {
@@ -42,8 +46,10 @@ describe('initCivilizationCarousel', () => {
     ]);
 
     const cards = root.querySelectorAll('.civ-card');
+    const dots = root.querySelectorAll('.civ-dot');
     cards[1].dispatchEvent(new window.Event('click'));
     expect(hidden.value).toBe('B');
     expect(cards[1].classList.contains('selected')).toBe(true);
+    expect(dots[1].classList.contains('active')).toBe(true);
   });
 });

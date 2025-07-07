@@ -378,6 +378,27 @@ canvas {
     object-fit: contain;
 }
 
+.civ-selector .civ-dots {
+    text-align: center;
+    margin-top: var(--space-sm);
+}
+
+.civ-selector .civ-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: var(--color-text);
+    border-radius: 50%;
+    opacity: 0.4;
+    margin: 0 4px;
+    transition: opacity var(--transition-fast), background var(--transition-fast);
+}
+
+.civ-selector .civ-dot.active {
+    background: var(--color-primary);
+    opacity: 1;
+}
+
 @media (min-width: 600px) {
     .civ-selector .civ-card {
         flex-basis: var(--card-width);
