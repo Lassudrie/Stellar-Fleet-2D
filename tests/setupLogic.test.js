@@ -16,7 +16,7 @@ describe('initCivilizationCarousel', () => {
     createDom();
   });
 
-  test('creates cards and hidden input', () => {
+  test('creates cards, dots and arrow', () => {
     const root = document.createElement('div');
     document.body.appendChild(root);
 
@@ -34,6 +34,9 @@ describe('initCivilizationCarousel', () => {
     const dots = root.querySelectorAll('.civ-dot');
     expect(dots.length).toBe(2);
     expect(dots[0].classList.contains('active')).toBe(true);
+
+    const arrow = root.querySelector('.civ-arrow');
+    expect(arrow).not.toBeNull();
   });
 
   test('clicking card updates selection', () => {

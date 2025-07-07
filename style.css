@@ -329,11 +329,12 @@ canvas {
 
 /* Civilization carousel */
 .civ-selector {
-    --card-width: min(240px, 60vw);
+    --card-width: min(260px, 70vw);
     width: 100%;
     overflow: hidden;
     margin: 0 auto 12px;
     container-type: inline-size;
+    position: relative;
 }
 
 .civ-selector .civ-container {
@@ -342,11 +343,13 @@ canvas {
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
-    gap: var(--space-md);
+    gap: 5vw;
     padding: var(--space-md) 0;
     width: 100%;
+    scroll-behavior: smooth;
     content-visibility: auto;
     contain-intrinsic-size: 200px;
+    scroll-padding-inline: 50%;
 }
 
 .civ-selector .civ-container::-webkit-scrollbar {
@@ -367,18 +370,24 @@ canvas {
     text-align: center;
     scroll-snap-align: center;
     cursor: pointer;
-    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    transition: transform 0.4s ease-out, box-shadow 0.4s ease-out;
     contain: layout paint;
     will-change: transform;
 }
 
-.civ-selector .civ-card.active {
+.civ-selector .civ-card:hover,
+.civ-selector .civ-card:active {
     transform: scale(1.05);
-    box-shadow: 0 0 15px var(--color-primary);
+    box-shadow: 0 0 12px var(--color-primary);
+}
+
+.civ-selector .civ-card.active {
+    transform: scale(1.06);
 }
 
 .civ-selector .civ-card.selected {
-    border: 2px solid var(--color-primary);
+    transform: scale(1.08);
+    box-shadow: 0 0 18px var(--color-primary);
 }
 
 .civ-selector .civ-card img {
@@ -395,18 +404,41 @@ canvas {
 
 .civ-selector .civ-dot {
     display: inline-block;
-    width: 8px;
-    height: 8px;
-    background: var(--color-text);
+    width: 12px;
+    height: 12px;
+    border: 2px solid var(--color-primary);
+    background: transparent;
     border-radius: 50%;
-    opacity: 0.4;
-    margin: 0 4px;
-    transition: opacity var(--transition-fast), background var(--transition-fast);
+    opacity: 0.5;
+    margin: 0 6px;
+    cursor: pointer;
+    transition: transform var(--transition-fast), background var(--transition-fast);
 }
 
 .civ-selector .civ-dot.active {
     background: var(--color-primary);
+    transform: scale(1.2);
     opacity: 1;
+}
+
+.civ-selector .civ-arrow {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--color-primary);
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    cursor: pointer;
+    animation: arrowBounce 2s infinite;
+    padding: 0 var(--space-sm);
+}
+
+@keyframes arrowBounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(-50%); }
+    40% { transform: translateY(calc(-50% - 6px)); }
+    60% { transform: translateY(calc(-50% - 3px)); }
 }
 
 @media (min-width: 600px) {

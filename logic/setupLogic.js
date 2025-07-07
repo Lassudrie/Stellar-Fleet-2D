@@ -4,6 +4,8 @@
  */
 import humans from '../dataclasses/Humans.js';
 import zelvans from '../dataclasses/Zelvans.js';
+import synthari from '../dataclasses/Synthari.js';
+import orrak from '../dataclasses/Orrak.js';
 
 export const defaultCivilizations = [
   {
@@ -15,6 +17,16 @@ export const defaultCivilizations = [
     name: zelvans.name,
     description: zelvans.background,
     image: zelvans.avatar
+  },
+  {
+    name: synthari.name,
+    description: synthari.background,
+    image: synthari.avatar
+  },
+  {
+    name: orrak.name,
+    description: orrak.background,
+    image: orrak.avatar
   }
 ];
 
@@ -30,12 +42,17 @@ export function initCivilizationCarousel(root, civilizations = defaultCivilizati
   container.className = 'civ-container';
   const dotsWrapper = document.createElement('div');
   dotsWrapper.className = 'civ-dots';
+  const nextArrow = document.createElement('button');
+  nextArrow.className = 'civ-arrow';
+  nextArrow.innerHTML = '&#9654;';
+  nextArrow.setAttribute('aria-label', 'Next civilization');
   const hidden = document.createElement('input');
   hidden.type = 'hidden';
   hidden.id = 'civilization';
   root.appendChild(container);
   root.appendChild(hidden);
   root.appendChild(dotsWrapper);
+  root.appendChild(nextArrow);
 
   civilizations.forEach((civ) => {
     const card = document.createElement('div');
@@ -52,40 +69,59 @@ export function initCivilizationCarousel(root, civilizations = defaultCivilizati
 
   const cards = container.querySelectorAll('.civ-card');
   const dots = dotsWrapper.querySelectorAll('.civ-dot');
-  if (cards.length) {
-    cards[0].classList.add('selected');
-    hidden.value = cards[0].dataset.value;
-    dots[0].classList.add('active');
-  }
+  let currentIndex = 0;
 
   const updateDots = (index) => {
     dots.forEach((d, i) => d.classList.toggle('active', i === index));
   };
 
-  cards.forEach((card, idx) => {
-    card.addEventListener('click', () => {
-      cards.forEach((c) => c.classList.remove('selected'));
-      card.classList.add('selected');
-      hidden.value = card.dataset.value;
-      updateDots(idx);
+  const setActiveCard = (index) => {
+    currentIndex = index;
+    cards.forEach((c, i) => {
+      c.classList.toggle('selected', i === index);
+      c.classList.toggle('active', i === index);
     });
+    hidden.value = cards[index].dataset.value;
+    updateDots(index);
+    const card = cards[index];
+    const target = card.offsetLeft - (container.clientWidth - card.offsetWidth) / 2;
+    if (typeof container.scrollTo === 'function') {
+      container.scrollTo({ left: target, behavior: 'smooth' });
+    } else {
+      container.scrollLeft = target;
+    }
+  };
+
+  if (cards.length) {
+    setActiveCard(0);
+  }
+
+  cards.forEach((card, idx) => {
+    card.addEventListener('click', () => setActiveCard(idx));
+  });
+
+  dots.forEach((dot, idx) => {
+    dot.addEventListener('click', () => setActiveCard(idx));
+  });
+
+  nextArrow.addEventListener('click', () => {
+    const next = (currentIndex + 1) % cards.length;
+    setActiveCard(next);
   });
 
   const updateActive = () => {
     const center = container.scrollLeft + container.clientWidth / 2;
-    let active = null;
+    let activeIndex = 0;
     let min = Infinity;
-    cards.forEach((card) => {
+    cards.forEach((card, i) => {
       const cardCenter = card.offsetLeft + card.offsetWidth / 2;
       const diff = Math.abs(center - cardCenter);
       if (diff < min) {
         min = diff;
-        active = card;
+        activeIndex = i;
       }
     });
-    cards.forEach((c) => c.classList.toggle('active', c === active));
-    const index = Array.from(cards).indexOf(active);
-    if (index >= 0) updateDots(index);
+    setActiveCard(activeIndex);
   };
 
   container.addEventListener('scroll', () => requestAnimationFrame(updateActive));
