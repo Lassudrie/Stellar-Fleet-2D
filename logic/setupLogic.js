@@ -28,11 +28,14 @@ export const defaultCivilizations = [
 export function initCivilizationCarousel(root, civilizations = defaultCivilizations) {
   const container = document.createElement('div');
   container.className = 'civ-container';
+  const dotsWrapper = document.createElement('div');
+  dotsWrapper.className = 'civ-dots';
   const hidden = document.createElement('input');
   hidden.type = 'hidden';
   hidden.id = 'civilization';
   root.appendChild(container);
   root.appendChild(hidden);
+  root.appendChild(dotsWrapper);
 
   civilizations.forEach((civ) => {
     const card = document.createElement('div');
@@ -43,19 +46,29 @@ export function initCivilizationCarousel(root, civilizations = defaultCivilizati
       <h3>${civ.name}</h3>
       <p>${civ.description}</p>`;
     container.appendChild(card);
+    const dot = document.createElement('span');
+    dot.className = 'civ-dot';
+    dotsWrapper.appendChild(dot);
   });
 
   const cards = container.querySelectorAll('.civ-card');
+  const dots = dotsWrapper.querySelectorAll('.civ-dot');
   if (cards.length) {
     cards[0].classList.add('selected');
     hidden.value = cards[0].dataset.value;
+    dots[0].classList.add('active');
   }
 
-  cards.forEach((card) => {
+  const updateDots = (index) => {
+    dots.forEach((d, i) => d.classList.toggle('active', i === index));
+  };
+
+  cards.forEach((card, idx) => {
     card.addEventListener('click', () => {
       cards.forEach((c) => c.classList.remove('selected'));
       card.classList.add('selected');
       hidden.value = card.dataset.value;
+      updateDots(idx);
     });
   });
 
@@ -72,6 +85,8 @@ export function initCivilizationCarousel(root, civilizations = defaultCivilizati
       }
     });
     cards.forEach((c) => c.classList.toggle('active', c === active));
+    const index = Array.from(cards).indexOf(active);
+    if (index >= 0) updateDots(index);
   };
 
   container.addEventListener('scroll', () => requestAnimationFrame(updateActive));
