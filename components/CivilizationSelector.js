@@ -11,6 +11,7 @@ export default function CivilizationSelector({ civilizations = [], onSelect }) {
   const [cardWidth, setCardWidth] = useState(0);
   const isDown = useRef(false);
   const startX = useRef(0);
+  const startY = useRef(0);
   const scrollStart = useRef(0);
 
   useEffect(() => {
@@ -27,15 +28,23 @@ export default function CivilizationSelector({ civilizations = [], onSelect }) {
     if (!container) return;
 
     const getX = (e) => (e.touches ? e.touches[0].clientX : e.clientX);
+    const getY = (e) => (e.touches ? e.touches[0].clientY : e.clientY);
     const onDown = (e) => {
       isDown.current = true;
       startX.current = getX(e);
+      startY.current = getY(e);
       scrollStart.current = container.scrollLeft;
     };
     const onMove = (e) => {
       if (!isDown.current) return;
-      container.scrollLeft = scrollStart.current + (startX.current - getX(e));
-      e.preventDefault();
+      const dx = startX.current - getX(e);
+      const dy = startY.current - getY(e);
+      if (Math.abs(dx) > Math.abs(dy)) {
+        container.scrollLeft = scrollStart.current + dx;
+        e.preventDefault();
+      } else {
+        isDown.current = false;
+      }
     };
     const onUp = () => {
       if (!isDown.current) return;
