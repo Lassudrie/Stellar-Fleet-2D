@@ -6,15 +6,8 @@ export function showSetupScene(container, onStart) {
 
   const formHtml = `
     <div class="setup-wrapper">
-      <div class="form-container">
-        <h2>New Empire Setup</h2>
-        <div>
-          <label>Civilization:<br>
-            <div id="civSelector" class="civ-selector"></div>
-          </label>
-        </div>
-        <button id="startBtn" class="next-btn" aria-label="Suivant">&rarr;</button>
-      </div>
+      <div id="civSelector" class="civ-selector"></div>
+      <button id="startBtn" class="next-btn" aria-label="Suivant">&rarr;</button>
     </div>`;
 
   container.innerHTML = formHtml;
