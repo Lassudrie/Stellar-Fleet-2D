@@ -309,6 +309,16 @@ canvas {
     cursor: pointer;
     transition: box-shadow var(--transition-fast);
 }
+.next-btn {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--color-primary);
+    margin-top: var(--space-md);
+}
+.next-btn:hover {
+    transform: scale(1.1);
+}
 .form-container input:hover,
 .form-container input:focus,
 .form-container select:hover,

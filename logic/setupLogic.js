@@ -43,8 +43,7 @@ export function initCivilizationCarousel(root, civilizations = defaultCivilizati
     card.dataset.value = civ.name;
     card.innerHTML = `
       <img src="${civ.image}" alt="${civ.name}">
-      <h3>${civ.name}</h3>
-      <p>${civ.description}</p>`;
+      <h3>${civ.name}</h3>`;
     container.appendChild(card);
     const dot = document.createElement('span');
     dot.className = 'civ-dot';
