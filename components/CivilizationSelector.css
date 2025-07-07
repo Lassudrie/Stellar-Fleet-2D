@@ -15,8 +15,8 @@
 }
 
 .civ-card {
-  flex: 0 0 85vw;
-  max-width: 400px;
+  flex: 0 0 68vw;
+  max-width: 320px;
   margin: 0 auto;
   box-sizing: border-box;
   border: 2px solid cyan;
@@ -46,6 +46,6 @@
 
 @media (min-width: 600px) {
   .civ-card {
-    flex-basis: 400px;
+    flex-basis: 320px;
   }
 }
