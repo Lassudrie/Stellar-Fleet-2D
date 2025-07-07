@@ -10,6 +10,7 @@ describe('Perks dataclass', () => {
     expect(p.malus).toBe(malus);
     expect(p.description).toBe('Boosts attack');
     expect(p.appliesTo).toBe('character');
+    expect(typeof p.id).toBe('string');
   });
 
   test('uses defaults when no args given', () => {
@@ -19,5 +20,6 @@ describe('Perks dataclass', () => {
     expect(p.malus).toEqual({});
     expect(p.description).toBe('');
     expect(p.appliesTo).toBe('faction');
+    expect(typeof p.id).toBe('string');
   });
 });
