@@ -6,6 +6,11 @@ export function startGame(parent = 'game-container', setupData = null) {
   if (!container) return;
   container.innerHTML = '';
 
+  if (!window.React || !window.ReactDOM) {
+    container.textContent = 'React required to run the game. Please check your connection.';
+    return;
+  }
+
   if (setupData) {
     showMainScene(container, { setupData });
   } else {
