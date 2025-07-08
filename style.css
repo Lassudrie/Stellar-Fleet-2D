@@ -460,3 +460,11 @@ canvas {
     }
 }
 
+.error {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+    padding: var(--space-lg);
+}
+
+
