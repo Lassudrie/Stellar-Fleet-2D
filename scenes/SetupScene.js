@@ -1,8 +1,11 @@
 import EmpireSetup from '../dataclasses/EmpireSetup.js';
 import { defaultCivilizations } from '../logic/setupLogic.js';
-import React from 'react';
-import { createRoot } from 'react-dom/client';
 import CivilizationSelector from '../components/CivilizationSelector.js';
+
+// Use global React/ReactDOM loaded via CDN instead of ESM imports so
+// the module works when opened directly in the browser.
+const React = window.React;
+const { createRoot } = window.ReactDOM;
 
 export function showSetupScene(container, onStart) {
   const setupData = new EmpireSetup();
