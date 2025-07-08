@@ -1,5 +1,9 @@
-import React, { useState, useEffect } from 'react';
 import './CivilizationSelector.css';
+
+// React is loaded globally from a CDN in index.html. Use the global
+// variables instead of ESM imports so the module works without bundling.
+const React = window.React;
+const { useState, useEffect } = React;
 
 /**
  * Simple carousel showing civilization cards.
